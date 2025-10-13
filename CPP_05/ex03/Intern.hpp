@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 18:54:33 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/10 18:55:56 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/13 17:15:26 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "Bureaucrat.hpp"
 
 class Intern
 {
@@ -41,3 +42,7 @@ class Intern
 };
 
 #endif
+
+// Tu clase Intern es una “fábrica” de formularios (Factory pattern).
+// El objetivo es que, dependiendo del nombre (name),
+// el becario (Intern) construya y devuelva un nuevo objeto del tipo correcto, heredado de AForm

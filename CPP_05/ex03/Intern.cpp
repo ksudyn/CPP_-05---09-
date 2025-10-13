@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 18:52:08 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/10 18:56:09 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/13 17:17:53 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ AForm *createShrub(const std::string &target)
 	AForm *a = new ShrubberyCreationForm(target);
 	return (a);
 }
+// Son pequeñas fábricas específicas, una por cada tipo de formulario.
+// Devuelven un puntero dinámico (new ...) a una subclase de AForm
 
 AForm *Intern::makeForm(const std::string &name, const std::string &target)
 {

@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 20:28:02 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/13 16:32:15 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/13 17:28:36 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,31 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 
-int main() {
-    Bureaucrat boss("Boss", 1);
-    RobotomyRequestForm robot("Bender");
-    PresidentialPardonForm pardon("Trillian");
-    ShrubberyCreationForm tardon("Meg");
-    std::cout << "\n";
+int main()
+{
+    Intern intern;
 
     try
     {
-        boss.signAForm(robot);
-        boss.executeForm(robot);
-        std::cout << "\n";
-
-        boss.signAForm(pardon);
-        boss.executeForm(pardon);
-        std::cout << "\n";
-
-        boss.signAForm(tardon);
-        boss.executeForm(tardon);
-        std::cout << "\n";
-    } catch (std::exception &e)
+        AForm *form = intern.makeForm("RobotomyRequest", "Bender");
+        std::cout << "Form created: " << form->getName() << std::endl;
+        delete form;
+    }
+    catch (std::exception &e)
     {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << e.what() << std::endl;
+    }
+
+    std::cout << "\n";
+    try
+    {
+        AForm *form = intern.makeForm("UnknownForm", "Nowhere");
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
     }
 }
+

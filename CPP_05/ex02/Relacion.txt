@@ -1,0 +1,26 @@
++----------------+        +--------------------+
+|  Bureaucrat    |<------>|       AForm        |
++----------------+        +--------------------+
+| - name         |        | - name             |
+| - grade        |        | - isSigned         |
++----------------+        | - gradeToSign      |
+| signAForm()    |        | - gradeToExecute   |
+| executeForm()  |        | - target           |
++----------------+        +--------------------+
+                               ^
+                               |
+            ----------------------------------------
+            |                  |                  |
+  +------------------+ +------------------+ +---------------------+
+  | Shrubbery...Form | | Robotomy...Form  | | Presidential...Form |
+  +------------------+ +------------------+ +---------------------+
+  | execute() {...}  | | execute() {...}  | | execute() {...}     |
+  +------------------+ +------------------+ +---------------------+
+
+Bureaucrat usa AForm pero no depende del tipo específico.
+→ Puede ejecutar o firmar cualquier tipo de formulario.
+
+AForm necesita saber el grado del Bureaucrat para comprobar si tiene permiso.
+
+Las subclases (Shrubbery, Robotomy, Presidential)
+heredan de AForm y definen lo que ocurre realmente al ejecutar.
