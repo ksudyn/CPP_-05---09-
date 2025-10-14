@@ -6,17 +6,17 @@
 #    By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 18:35:55 by ksudyn            #+#    #+#              #
-#    Updated: 2025/10/13 20:15:33 by ksudyn           ###   ########.fr        #
+#    Updated: 2025/10/14 20:00:43 by ksudyn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = 
+NAME = convert
 CC = c++
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRCS = main.cpp 
+SRCS = main.cpp ScalarConverter.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
