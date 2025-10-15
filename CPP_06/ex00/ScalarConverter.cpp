@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 20:51:01 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/14 20:38:25 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/15 15:21:32 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,8 @@ void ScalarConverter::convert(const std::string &literal)
     // ------------------------------------------------------------
     // CONVERSIÓN SEGÚN EL TIPO DETECTADO
     // ------------------------------------------------------------
-    try {
+    try
+    {
         switch (type)
         {
             case CHAR:

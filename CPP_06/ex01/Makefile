@@ -6,17 +6,17 @@
 #    By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 18:35:55 by ksudyn            #+#    #+#              #
-#    Updated: 2025/10/13 20:15:40 by ksudyn           ###   ########.fr        #
+#    Updated: 2025/10/15 15:27:16 by ksudyn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = 
+NAME = Serializer
 CC = c++
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRCS = main.cpp 
+SRCS = main.cpp Serializer.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
