@@ -6,17 +6,17 @@
 #    By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 18:35:55 by ksudyn            #+#    #+#              #
-#    Updated: 2025/10/15 19:40:30 by ksudyn           ###   ########.fr        #
+#    Updated: 2025/10/16 16:58:18 by ksudyn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = 
+NAME = Array
 CC = c++
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRCS = main.cpp Array.tpp
+SRCS = main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

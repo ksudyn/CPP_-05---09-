@@ -6,12 +6,12 @@
 #    By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 18:35:55 by ksudyn            #+#    #+#              #
-#    Updated: 2025/10/15 19:40:40 by ksudyn           ###   ########.fr        #
+#    Updated: 2025/10/16 16:16:40 by ksudyn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = 
+NAME = iter
 CC = c++
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98
