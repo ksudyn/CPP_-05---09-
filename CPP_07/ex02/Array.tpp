@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 19:40:04 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/16 16:57:22 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/17 16:55:53 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ Array<T>::Array(const Array& other): _arr(NULL), _size(0)
 
 template <typename T>
 Array<T>& Array<T>::operator=(const Array& other)
-{
+{   //Se debe hacer una copia profunda (deep copy)
     if (this != &other)
-    {
+    {   //Se libera memoria previa antes de reasignar
 		delete[] this->_arr;
         this->_size = other._size;
         this->_arr = new T[this->_size]();
@@ -67,6 +67,9 @@ T& Array<T>::operator[](unsigned int index)
 	return (_arr[index]);
 }
 
+//Permite acceder a los elementos
+//Si el índice está fuera de rango se lanza una excepción
+
 template <typename T>
 const T& Array<T>::operator[](unsigned int index) const
 {
@@ -89,3 +92,11 @@ std::ostream& operator<<(std::ostream& os, const Array<T>& arr)
     os << "]";
     return os;
 }
+
+//os es una referencia a un flujo de salida (std::cout, std::ofstream, etc.).
+//const Array<T>& arr es el objeto que queremos mostrar.
+//Se pasa por referencia constante para no copiarlo ni modificarlo
+
+// usa tu operador [] para acceder a cada elemento,
+// lo imprime (os << arr[i];),
+// y si no es el último, imprime una coma y un espacio

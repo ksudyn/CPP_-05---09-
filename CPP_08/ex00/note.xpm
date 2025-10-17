@@ -1,0 +1,16 @@
+STL: Standard template Library. 
+
+	permet de ne pas refaire la base du code pour les linked list, vector etc ..
+	--> on as un standard. 
+Pillars: 
+	Containers: Store and organize elements.
+	Iterators: Uniform way to traverse containers.
+	Algorithms: Perform operations on data via iterators.
+
+
+| Container  | Common Types     | Key Features                                      | Element Access                         | Adding/Removing Elements                                                                               |
+| ---------- | ---------------- | ------------------------------------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| vector     | std::vector<T>   | Dynamic array, contiguous memory                  | v[i], v.at(i), front(), back()         | push_back(), insert(pos, val), erase(pos), resize(n), clear()                                         |
+| deque      | std::deque<T>    | Double-ended queue, fast insert/remove front/back | d[i], d.at(i), front(), back()         | push_back(), push_front(), insert(pos,val), erase(pos), pop_back(), pop_front(), clear()              |
+| list       | std::list<T>     | Doubly-linked list, fast insert/remove anywhere   | front(), back()                        | push_back(), push_front(), insert(pos,val), erase(pos), pop_back(), pop_front(), clear()              |
+

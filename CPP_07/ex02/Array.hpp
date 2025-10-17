@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 19:39:56 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/16 16:49:39 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/17 16:36:45 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,18 @@ std::ostream& operator<<(std::ostream& os, const Array<T>& arr);
 #include "Array.tpp"
 
 #endif
+
+
+// Te pide implementar una clase template llamada Array,
+// que actúa como una versión simplificada de std::vector
+
+// - Es genérica (usa templates -> puede contener
+//     int, float, std::string, etc.).
+// - Usa memoria dinámica (new[] y delete[]).
+// - Implementa constructor, destructor, copia,
+//     asignación, operador [] y size()
+
+
+// Este es uno de los más importantes porque combina
+// templates + clases + memoria dinámica + manejo de excepciones
+// + sobrecarga de operadores.

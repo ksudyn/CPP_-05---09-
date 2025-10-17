@@ -6,40 +6,11 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 19:23:07 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/16 17:28:13 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/17 15:11:39 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Array.hpp"
-
-// int main()
-// {
-//     try {
-//         Array<int> a(5);
-//         for (unsigned int i = 0; i < a.size(); i++)
-//             a[i] = i * 10;
-
-//         Array<int> b = a; // copia
-//         b[0] = 999;
-
-//         std::cout << "Array A: ";
-//         for (unsigned int i = 0; i < a.size(); i++)
-//             std::cout << a[i] << " ";
-
-//         std::cout << "\nArray B: ";
-//         for (unsigned int i = 0; i < b.size(); i++)
-//             std::cout << b[i] << " ";
-
-//         std::cout << "\nAccessing invalid index:\n";
-//         std::cout << a[10] << std::endl; // lanza excepción
-
-//     } catch (const std::exception &e) {
-//         std::cerr << "Exception: " << e.what() << std::endl;
-//     }
-
-//     return 0;
-// }
-
 #include <cstdlib>
 #include <ctime>
 
