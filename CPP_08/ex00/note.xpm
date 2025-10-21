@@ -14,3 +14,18 @@ Pillars:
 | deque      | std::deque<T>    | Double-ended queue, fast insert/remove front/back | d[i], d.at(i), front(), back()         | push_back(), push_front(), insert(pos,val), erase(pos), pop_back(), pop_front(), clear()              |
 | list       | std::list<T>     | Doubly-linked list, fast insert/remove anywhere   | front(), back()                        | push_back(), push_front(), insert(pos,val), erase(pos), pop_back(), pop_front(), clear()              |
 
+
+
+std::vector		Un arreglo dinámico: puede crecer o encogerse									[10, 20, 30, 40]
+std::list		Una lista doblemente enlazada (cada elemento conoce al anterior y al siguiente)	10 <-> 20 <-> 30
+std::deque		Como un vector, pero puedes insertar por delante o detrás fácilmente			[10, 20, 30]
+std::set	 	Guarda valores únicos y ordenados automáticamente						 		 {10, 20, 30}
+std::map		Guarda pares clave-valor (como un diccionario)									{1: "uno", 2: "dos"}
+
+
+Cada contenedor tiene funciones comunes:
+
+.begin() 		→ el primer elemento
+.end() 			→ el final (uno después del último)
+.push_back() 	→ agregar al final
+.size() 		→ cuántos elementos tiene
