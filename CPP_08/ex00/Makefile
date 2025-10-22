@@ -6,14 +6,14 @@
 #    By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/17 17:15:45 by ksudyn            #+#    #+#              #
-#    Updated: 2025/10/17 17:30:16 by ksudyn           ###   ########.fr        #
+#    Updated: 2025/10/22 15:10:33 by ksudyn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = easyfind
-CC = c++
+CXX = c++
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRCS = main.cpp
 
@@ -22,7 +22,7 @@ OBJS = $(SRCS:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
 clean:
 	rm -rf $(OBJS)

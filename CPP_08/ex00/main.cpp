@@ -6,20 +6,29 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 17:07:19 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/21 13:55:03 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/22 15:50:09 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vector>
 #include "easyfind.hpp"
 
+#include <iostream>
+#include <vector>
+#include "easyfind.hpp"
+
 int main()
 {
-    std::vector<int> nums = {10, 20, 30, 40, 50};
+    std::vector<int> nums;
+    nums.push_back(10);
+    nums.push_back(20);
+    nums.push_back(30);
+    nums.push_back(40);
+    nums.push_back(50);
 
     try
     {
-        auto it = easyfind(nums, 30);
+        std::vector<int>::iterator it = easyfind(nums, 30);
         std::cout << "Encontrado: " << *it << std::endl;
     }
     catch (const std::exception& e)
@@ -38,3 +47,4 @@ int main()
 
     return 0;
 }
+
