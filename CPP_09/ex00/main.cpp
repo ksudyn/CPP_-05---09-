@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   identify.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/15 16:34:38 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/24 20:35:43 by ksudyn           ###   ########.fr       */
+/*   Created: 2025/10/24 20:48:29 by ksudyn            #+#    #+#             */
+/*   Updated: 2025/10/24 20:48:38 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IDENTIFY_HPP
-#define IDENTIFY_HPP
+#include "BitcoinExchange.hpp"
 
-#include "Base.hpp"
-#include <typeinfo>
-
-Base*	generate(void);
-void	identify(Base* p);
-void	identify(Base& p);
-
-
-#endif
+int main(int argc, char **argv)
+{
+	if (argc != 2)
+	{
+		std::cout << "Error: could not open file." << std::endl;
+		return (1);
+	}
+	if (BitcoinExchange(argv) == 1)
+		return (1);
+	return (0);
+}

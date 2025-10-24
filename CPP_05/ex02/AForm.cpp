@@ -6,13 +6,13 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 18:04:07 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/10 21:13:19 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/24 18:03:50 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
 
-AForm::AForm() : _name(""), _gradeToExecute(150), _gradeToSign(150)
+AForm::AForm() : _name(""), _gradeToSign(150),_gradeToExecute(150)
 {
     this->_isSigned = 0;
     std::cout << "Default Form Constructor called" << std::endl;
@@ -32,7 +32,7 @@ AForm::~AForm()
 	std::cout << "Default Form Destructor called" << std::endl;
 }
 
-AForm::AForm( const AForm& before ) : _name(before._name), _gradeToExecute(before._gradeToExecute), _gradeToSign(before._gradeToSign), _isSigned(before._isSigned)
+AForm::AForm( const AForm& before ) : _name(before._name),  _isSigned(before._isSigned), _gradeToSign(before._gradeToSign),  _gradeToExecute(before._gradeToExecute)
 {
 	std::cout << "Copy Constructor called" << std::endl;
 	*this = before;

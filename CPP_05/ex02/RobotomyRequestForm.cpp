@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 19:06:52 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/10 20:21:46 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/24 18:07:32 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &o
 
 void RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
+    (void)executor;
     // Primero, comprueba si el burócrata tiene permiso y si el form está firmado
     getGradeToExecute(); // método heredado de AForm (si lo implementas allí)
 

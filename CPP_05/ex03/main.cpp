@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 20:28:02 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/13 17:28:36 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/24 19:37:22 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int main()
     try
     {
         AForm *form = intern.makeForm("UnknownForm", "Nowhere");
+        (void)form;
     }
     catch (std::exception &e)
     {

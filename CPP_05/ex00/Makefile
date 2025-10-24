@@ -6,7 +6,7 @@
 #    By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 18:35:55 by ksudyn            #+#    #+#              #
-#    Updated: 2025/10/22 15:14:36 by ksudyn           ###   ########.fr        #
+#    Updated: 2025/10/24 15:46:05 by ksudyn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME = bureaucrats
 CXX = c++
 
-XXFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRCS = main.cpp Bureaucrat.cpp
 

@@ -1,24 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   identify.hpp                                       :+:      :+:    :+:   */
+/*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/15 16:34:38 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/24 20:35:43 by ksudyn           ###   ########.fr       */
+/*   Created: 2025/10/24 20:48:56 by ksudyn            #+#    #+#             */
+/*   Updated: 2025/10/24 20:49:31 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IDENTIFY_HPP
-#define IDENTIFY_HPP
+#include "BitcoinExchange.hpp"
 
-#include "Base.hpp"
-#include <typeinfo>
-
-Base*	generate(void);
-void	identify(Base* p);
-void	identify(Base& p);
-
-
-#endif

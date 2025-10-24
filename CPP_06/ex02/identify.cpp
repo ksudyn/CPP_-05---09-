@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 16:34:24 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/15 17:20:06 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/24 20:35:53 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,30 @@ void identify(Base& p)
         (void)dynamic_cast<A&>(p);
         std::cout << "A\n";
         return;
-    } catch (std::bad_cast&) {}
+    }
+    catch (std::bad_cast&)
+    {
+    }
 
     try
     {
         (void)dynamic_cast<B&>(p);
         std::cout << "B\n";
         return;
-    } catch (std::bad_cast&) {}
+    }
+    catch (std::bad_cast&)
+    {
+    }
 
     try
     {
         (void)dynamic_cast<C&>(p);
         std::cout << "C\n";
         return;
-    } catch (std::bad_cast&) {}
+    }
+    catch (std::bad_cast&)
+    {
+    }
 
     std::cout << "Unknown type\n";
 }

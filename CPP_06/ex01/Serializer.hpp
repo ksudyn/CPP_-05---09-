@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:22:40 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/15 16:14:41 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/24 20:31:59 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <stdint.h>
 #include <iostream>
-#include <cstdint>
+#include <cstddef>
 #include "Data.hpp"
 
 class Serializer
@@ -29,7 +29,7 @@ class Serializer
 
 	public:
 		static uintptr_t	serialize(Data *ptr);
-		static Data*		deserialize(uintptr_t raw);
+		static Data*		deserialize(std::size_t raw);
 };
 
 #endif

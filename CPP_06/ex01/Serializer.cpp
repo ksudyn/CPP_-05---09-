@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:22:33 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/15 16:26:15 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/24 20:29:06 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ Serializer &Serializer::operator=(Serializer const &other)
 
 uintptr_t Serializer::serialize(Data* ptr)
 {
-    return reinterpret_cast<uintptr_t>(ptr);
+    return reinterpret_cast<std::size_t>(ptr);
 }
 //serialize() convierte una dirección de memoria (un puntero)
 //a un entero sin signo (uintptr_t)
 
-Data* Serializer::deserialize(uintptr_t raw)
+Data* Serializer::deserialize(std::size_t raw)
 {
     return reinterpret_cast<Data*>(raw);
 }

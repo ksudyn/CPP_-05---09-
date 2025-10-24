@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 18:04:19 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/13 16:15:57 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/24 18:13:16 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class AForm
 	public:
         AForm();
         AForm( std::string name, int gradeToSign, int gradeToExecute );
-        ~AForm();
+        virtual ~AForm();
         AForm( const AForm& before );
         AForm& operator=( const AForm& before );
 		

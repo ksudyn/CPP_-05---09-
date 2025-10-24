@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 19:38:58 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/16 14:01:19 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/24 15:59:22 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <iostream>
 
 template <typename T, typename F>
-void iter(T* array, const int length, F func)
+void iter(T* array, const size_t length, F func)
 {
     for(size_t i = 0; i < length; ++i)
         func(array[i]);
