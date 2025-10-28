@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 20:48:56 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/27 16:57:30 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/28 20:03:51 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	load_args(const std::string &date)
 		return (-1);
 
 	// -------------- 2. Comprobar si el año es bisiesto --------------
+	// Aplica las reglas del calendario gregoriano
 	if ((fullDate % 4 == 0 && fullDate % 100 != 0) || (fullDate % 400 == 0))
 		isLeapYear = 1;
 
@@ -101,4 +102,35 @@ int	load_args(const std::string &date)
 
 	// -------------- 6. Todo correcto: devolver la fecha como número --------------
 	return (fullDate);
+}
+
+
+float getClosestPrice(const std::map<std::string, float> &database, const std::string &date)
+{
+    // Validar formato de fecha con tu función load_args()
+    if (load_args(date) == -1)
+    {
+        std::cerr << "Error: bad input => " << date << std::endl;
+        return -1.0f;
+    }
+
+    // Buscar la fecha exacta
+    std::map<std::string, float>::const_iterator it = database.find(date);
+    if (it != database.end())
+        return it->second; // Fecha exacta encontrada
+
+    // Buscar la fecha anterior más cercana
+    it = database.lower_bound(date);
+
+    // Si lower_bound devuelve begin(), no hay fecha anterior
+    if (it == database.begin())
+    {
+        std::cerr << "Error: no previous date available for " << date << std::endl;
+        return -1.0f;
+    }
+
+    // Retrocedemos un elemento para obtener la fecha inmediatamente anterior
+    --it;
+
+    return it->second; // Devolver el valor del día anterior más cercano
 }
