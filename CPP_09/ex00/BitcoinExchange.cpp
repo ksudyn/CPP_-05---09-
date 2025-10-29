@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 20:48:56 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/28 20:03:51 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/29 19:29:17 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ float getClosestPrice(const std::map<std::string, float> &database, const std::s
     }
 
     // Buscar la fecha exacta
-    std::map<std::string, float>::const_iterator it = database.find(date);
+    std::map<std::string, float>::const_iterator it;
+	it = database.find(date);
     if (it != database.end())
         return it->second; // Fecha exacta encontrada
 
@@ -133,4 +134,112 @@ float getClosestPrice(const std::map<std::string, float> &database, const std::s
     --it;
 
     return it->second; // Devolver el valor del día anterior más cercano
+}
+
+// Un std::map es un contenedor que:
+// Guarda pares (clave, valor) → aquí (fecha, precio).
+// Está ordenado automáticamente por la clave (std::string).
+// No puede tener claves duplicadas
+
+
+// std::map<tipoClave, tipoValor>
+// Por ejemplo:
+
+// Ejemplo	Qué hace
+// std::map<int, std::string>		Mapa que asocia un número con una palabra (ej. 1 → "Lunes")
+// std::map<std::string, float>		Mapa que asocia un texto (como una fecha) con un número (precio)
+// std::map<char, int>				Mapa que asocia letras con valores numéricos
+
+// Asi find busca dentro de database el date mientras avanza
+// Si no llega a end que es el final devuelve esa fecha
+// Si llega hasta end entonces usa lower_bound
+// para retrocede hasta encontrar la primera fecha anterior mas cercana
+// Si llega a begin que es el principio significa que no hay fecha anterior cercana valida
+// Si no devolvemos esa fecha
+
+
+int	BitcoinExchange(char **argv)
+{
+	std::ifstream file_txt(argv[1]); // abrir archivo input.txt
+	if (!file_txt.is_open())
+	{
+		std::cerr << "Error: could not open file." << std::endl;
+		return (1);
+	}
+
+	// 1️⃣ Cargar la base de datos de precios (data.csv)
+	std::ifstream data_csv("data.csv");
+	if (!data_csv.is_open())
+	{
+		std::cerr << "Error: could not open data.csv file." << std::endl;
+		return (1);
+	}
+
+	std::map<std::string, float> database;
+	std::string line;
+
+	std::getline(data_csv, line); // ignorar encabezado "date,exchange_rate"
+	while (std::getline(data_csv, line))
+	{
+		std::stringstream ss(line);
+		std::string date;
+		std::string valueStr;
+		if (!std::getline(ss, date, ','))
+			continue;
+		if (!std::getline(ss, valueStr))
+			continue;
+		database[date] = static_cast<float>(atof(valueStr.c_str()));
+	}
+	data_csv.close();
+
+	// 2️⃣ Procesar archivo de entrada del usuario (input.txt)
+	std::getline(file_txt, line); // saltar encabezado "date | value"
+	while (std::getline(file_txt, line))
+	{
+		if (line.empty())
+			continue;
+
+		std::stringstream ss(line);
+		std::string date;
+		std::string valueStr;
+
+		if (!std::getline(ss, date, '|') || !std::getline(ss, valueStr))
+		{
+			std::cerr << "Error: bad input => " << line << std::endl;
+			continue;
+		}
+
+		// eliminar espacios en blanco alrededor
+		while (!date.empty() && (date[0] == ' ' || date[0] == '\t'))
+			date.erase(0, 1);
+		while (!date.empty() && (date[date.size() - 1] == ' ' || date[date.size() - 1] == '\t'))
+			date.erase(date.size() - 1, 1);
+		while (!valueStr.empty() && (valueStr[0] == ' ' || valueStr[0] == '\t'))
+			valueStr.erase(0, 1);
+
+		float value = static_cast<float>(atof(valueStr.c_str()));
+
+		// Validar número
+		if (value < 0)
+		{
+			std::cerr << "Error: not a positive number." << std::endl;
+			continue;
+		}
+		if (value > 1000)
+		{
+			std::cerr << "Error: too large a number." << std::endl;
+			continue;
+		}
+
+		// Obtener el precio usando tu función
+		float rate = getClosestPrice(database, date);
+		if (rate < 0)
+			continue; // error ya mostrado dentro de getClosestPrice()
+
+		// Mostrar resultado
+		std::cout << date << " => " << value << " = " << value * rate << std::endl;
+	}
+
+	file_txt.close();
+	return (0);
 }
