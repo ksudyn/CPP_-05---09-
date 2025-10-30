@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 20:48:56 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/29 19:29:17 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/10/30 17:54:17 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 //            y devolverla como número entero (YYYYMMDD)
 // Retorna: int (fecha como entero) o -1 si hay error
 // -----------------------------------------------------------
+
 int	load_args(const std::string &date)
 {
 	int	fullDate = 0;      // Fecha completa como entero (YYYYMMDD)
@@ -105,7 +106,7 @@ int	load_args(const std::string &date)
 }
 
 
-float getClosestPrice(const std::map<std::string, float> &database, const std::string &date)
+float getClosestPrice(const std::map<std::string, float> &database_csv, const std::string &date)
 {
     // Validar formato de fecha con tu función load_args()
     if (load_args(date) == -1)
@@ -116,15 +117,15 @@ float getClosestPrice(const std::map<std::string, float> &database, const std::s
 
     // Buscar la fecha exacta
     std::map<std::string, float>::const_iterator it;
-	it = database.find(date);
-    if (it != database.end())
+	it = database_csv.find(date);
+    if (it != database_csv.end())
         return it->second; // Fecha exacta encontrada
 
     // Buscar la fecha anterior más cercana
-    it = database.lower_bound(date);
+    it = database_csv.lower_bound(date);
 
     // Si lower_bound devuelve begin(), no hay fecha anterior
-    if (it == database.begin())
+    if (it == database_csv.begin())
     {
         std::cerr << "Error: no previous date available for " << date << std::endl;
         return -1.0f;
@@ -160,14 +161,15 @@ float getClosestPrice(const std::map<std::string, float> &database, const std::s
 
 int	BitcoinExchange(char **argv)
 {
-	std::ifstream file_txt(argv[1]); // abrir archivo input.txt
+	//Se abre argv[1] en modo lectura y se asocia a file_txt usando ifstream
+	std::ifstream file_txt(argv[1]);
 	if (!file_txt.is_open())
 	{
 		std::cerr << "Error: could not open file." << std::endl;
 		return (1);
 	}
 
-	// 1️⃣ Cargar la base de datos de precios (data.csv)
+	//Se abre data.csv en modo lectura y se asocia a data_csv usando ifstream
 	std::ifstream data_csv("data.csv");
 	if (!data_csv.is_open())
 	{
@@ -175,10 +177,17 @@ int	BitcoinExchange(char **argv)
 		return (1);
 	}
 
-	std::map<std::string, float> database;
+	// Un std::map es un contenedor que:
+	// Guarda pares (clave, valor) → aquí (fecha, precio).
+	// Está ordenado automáticamente por la clave (std::string).
+	// No puede tener claves duplicadas
+	std::map<std::string, float> database_csv;
 	std::string line;
 
-	std::getline(data_csv, line); // ignorar encabezado "date,exchange_rate"
+
+	//std::getline() lee una línea completa del archivo, hasta que encuentra un salto de línea (\n)
+	
+	std::getline(data_csv, line);
 	while (std::getline(data_csv, line))
 	{
 		std::stringstream ss(line);
@@ -188,56 +197,80 @@ int	BitcoinExchange(char **argv)
 			continue;
 		if (!std::getline(ss, valueStr))
 			continue;
-		database[date] = static_cast<float>(atof(valueStr.c_str()));
+		// std::stringstream ss(line);
+		// Crea un "flujo de texto" interno para poder leer partes separadas de line fácilmente.
+		// Si line = "2011-01-03,0.3", entonces con std::stringstream ss(line) puedes leer:
+		// std::getline(ss, date, ','); // lee hasta la coma -> "2011-01-03"
+		// std::getline(ss, valueStr);  // lee el resto -> "0.3"
+		
+		database_csv[date] = static_cast<float>(atof(valueStr.c_str()));
 	}
 	data_csv.close();
 
-	// 2️⃣ Procesar archivo de entrada del usuario (input.txt)
-	std::getline(file_txt, line); // saltar encabezado "date | value"
+	// Procesar archivo de entrada del usuario (input.txt)
+	std::getline(file_txt, line);
 	while (std::getline(file_txt, line))
 	{
-		if (line.empty())
+		if (line.empty())///sila línea esta vacía se la salta
 			continue;
 
 		std::stringstream ss(line);
+		//Crea un objeto de flujo de texto (stringstream)
+		//que permite leer partes de la cadena igual que si fuera un archivo
 		std::string date;
 		std::string valueStr;
 
 		if (!std::getline(ss, date, '|') || !std::getline(ss, valueStr))
 		{
+			// std::getline(ss, date, '|')
+			// Lee desde el inicio de ss hasta encontrar el carácter '|',
+			// y guarda esa parte en date
+
+			// std::getline(ss, valueStr)
+			// Vuelve a leer del mismo ss, pero esta vez sin delimitador (por defecto usa el fin de línea).
+			// Así que toma el resto de la cadena después del '|'
+			
 			std::cerr << "Error: bad input => " << line << std::endl;
 			continue;
 		}
 
-		// eliminar espacios en blanco alrededor
+		// empty comprueba si la cadena esta vacía
+		// erase elimina caracteres y funciona asi
+		// rase(0, 1) significa:
+		// “Borra desde la posición 0 (el primer carácter), 1 carácter
+		// size saca el tamaño total
 		while (!date.empty() && (date[0] == ' ' || date[0] == '\t'))
 			date.erase(0, 1);
 		while (!date.empty() && (date[date.size() - 1] == ' ' || date[date.size() - 1] == '\t'))
 			date.erase(date.size() - 1, 1);
 		while (!valueStr.empty() && (valueStr[0] == ' ' || valueStr[0] == '\t'))
 			valueStr.erase(0, 1);
+		//Basicamente si en la cadena hay algo y al principio o al final hay espacios o tabulaciones se eliminan
 
-		float value = static_cast<float>(atof(valueStr.c_str()));
+		float value_txt = static_cast<float>(atof(valueStr.c_str()));
+		// valueStr.c_str() convierte el std::string a un const char *,
+		// para poder usar funciones C como atof.
+		// atof() convierte esa cadena de caracteres ("3.5") en número real (3.5).
+		// static_cast<float>() asegura que el resultado sea tipo float.
+		
 
-		// Validar número
-		if (value < 0)
+		if (value_txt < 0)
 		{
 			std::cerr << "Error: not a positive number." << std::endl;
 			continue;
 		}
-		if (value > 1000)
+		if (value_txt > 1000)
 		{
 			std::cerr << "Error: too large a number." << std::endl;
 			continue;
 		}
 
-		// Obtener el precio usando tu función
-		float rate = getClosestPrice(database, date);
+		// Obtener el precio
+		float rate = getClosestPrice(database_csv, date);
 		if (rate < 0)
-			continue; // error ya mostrado dentro de getClosestPrice()
+			continue;
 
-		// Mostrar resultado
-		std::cout << date << " => " << value << " = " << value * rate << std::endl;
+		std::cout << date << " => " << value_txt << " = " << value_txt * rate << std::endl;
 	}
 
 	file_txt.close();

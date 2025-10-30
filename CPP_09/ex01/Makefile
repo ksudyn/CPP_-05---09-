@@ -6,7 +6,7 @@
 #    By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/17 17:15:45 by ksudyn            #+#    #+#              #
-#    Updated: 2025/10/23 19:41:52 by ksudyn           ###   ########.fr        #
+#    Updated: 2025/10/30 19:26:05 by ksudyn           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CXX = c++
 
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRCS = main.cpp
+SRCS = main.cpp RPN.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
