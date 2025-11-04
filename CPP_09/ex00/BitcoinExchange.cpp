@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 20:48:56 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/31 15:47:35 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/11/04 16:37:16 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,23 @@ int	BitcoinExchange(char **argv)
 	}
 	data_csv.close();
 
-	std::getline(file_txt, line);
+	if (!std::getline(file_txt, line))
+	{
+		std::cerr << "Error: input file is empty." << std::endl;
+		return (1);
+	}
+
+	while (!line.empty() && (line[0] == ' ' || line[0] == '\t'))
+		line.erase(0, 1);
+	while (!line.empty() && (line[line.size() - 1] == ' ' || line[line.size() - 1] == '\t'))
+		line.erase(line.size() - 1, 1);
+
+	if (line != "date | value")
+	{
+		std::cerr << "Error: missing or invalid header (expected \"date | value\")." << std::endl;
+		return (1);
+	}
+	
 	while (std::getline(file_txt, line))
 	{
 		if (line.empty())

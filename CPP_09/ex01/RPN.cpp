@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 17:34:49 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/10/30 20:47:42 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/11/04 18:01:31 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int reverse_polish_notation(const char *expr)
         {
             if (std::isdigit(expr[i + 1]))
             {
-                std::cerr << "Error: nuber with more than one digit" << std::endl;
+                std::cerr << "Error: number with more than one digit" << std::endl;
                 return 1;
             }
             result.push(expr[i] - '0');

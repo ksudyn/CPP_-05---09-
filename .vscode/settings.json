@@ -51,6 +51,7 @@
         "span": "cpp",
         "sstream": "cpp",
         "streambuf": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "list": "cpp"
     }
 }
