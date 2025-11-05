@@ -1,0 +1,16 @@
+Nivel 1: arg = [8,3,6,1,5,2]
+   ├── small = [3,1,2]
+   └── big = [8,6,5]
+           ↓
+         (Llamada recursiva)
+Nivel 2: arg = [8,6,5]
+   ├── small = [6]
+   ├── big = [8]
+   └── single = 5
+           ↓
+       big = [5,6,8]
+   ← regresa al nivel 1
+Nivel 1 continúa:
+   small = [3,1,2]
+   big = [5,6,8]
+   → inserta lowers → [1,2,3,5,6,8]

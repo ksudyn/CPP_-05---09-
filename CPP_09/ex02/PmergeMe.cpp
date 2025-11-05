@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 15:37:16 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/11/04 20:44:04 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/11/05 20:45:52 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,28 @@
 // Para ordenar los cortos en sus posicion correspondiente se hace mnuelamente o
 // usando std::lower_bound que devuelve el iterador al primer elemento mayor al valor dado.
 
+bool Is_Positive_Numbers(const std::string &str)
+{
+    if (str.empty())
+        return false;
+    for (size_t i = 0; i < str.size(); ++i)
+        if (!isdigit(str[i]))
+            return false;
+    return true;
+}
+
+
 void M_I_S_Vector(std::vector<int> &arg)
 {
     if(arg.size() <= 1)
     {
-        std::cerr << "Error: insufficient numbers" << std::endl;
+        return ;
     }
 
     std::vector<int> small;
     std::vector<int> big;
     bool has_single = false;
-    int single;
+    int single = 0;
 
     for (size_t i = 0; i < arg.size(); i += 2)
     {
@@ -60,19 +71,39 @@ void M_I_S_Vector(std::vector<int> &arg)
             single = arg[i];
         }
     }
+
+    M_I_S_Vector(big);
+
+    for (std::vector<int>::iterator it = small.begin(); it != small.end(); ++it)
+    {
+        std::vector<int>::iterator pos;
+        
+        pos = std::lower_bound(big.begin(), big.end(), *it);
+        big.insert(pos, *it);
+    }
+
+    if(has_single)
+    {
+        std::vector<int>::iterator pos;
+        
+        pos = std::lower_bound(big.begin(), big.end(), single);
+        big.insert(pos, single);
+    }
+
+    arg = big;
 }
 
 void M_I_S_Deque(std::deque<int> &arg)
 {
     if(arg.size() <= 1)
     {
-        std::cerr << "Error: insufficient numbers" << std::endl;
+        return ;
     }
     
     std::deque<int> small;
     std::deque<int> big;
-    bool has_single;
-    int single;
+    bool has_single = false;
+    int single = 0;
 
     for (size_t i = 0; i < arg.size(); i += 2)
     {
@@ -97,4 +128,24 @@ void M_I_S_Deque(std::deque<int> &arg)
             single = arg[i];
         }
     }
+    
+    M_I_S_Deque(big);
+
+    for(std::deque<int>::iterator it = small.begin(); it != small.end(); ++it)
+    {
+        std::deque<int>::iterator pos;
+
+        pos = std::lower_bound(big.begin(), big.end(), *it);
+        big.insert(pos, *it);
+    }
+    
+    if(has_single)
+    {
+        std::deque<int>::iterator pos;
+
+        pos = std::lower_bound(big.begin(), big.end(), single);
+        big.insert(pos, single);
+    }
+    
+    arg = big;
 }
