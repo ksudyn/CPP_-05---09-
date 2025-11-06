@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 15:37:16 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/11/05 20:45:52 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/11/06 17:49:07 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,4 +148,81 @@ void M_I_S_Deque(std::deque<int> &arg)
     }
     
     arg = big;
+}
+
+long getTimeInMicroseconds(void)
+{
+    struct timeval time;
+    gettimeofday(&time, NULL);
+    return (time.tv_sec * 1000000L + time.tv_usec);
+}
+
+long getTimeInMilliseconds(void)
+{
+    struct timeval time;
+    gettimeofday(&time, NULL);
+    return (time.tv_sec * 1000L + time.tv_usec / 1000L);
+}
+
+double TimeVector(std::vector<int> &vector)
+{
+    long start = getTimeInMicroseconds();
+    M_I_S_Vector(vector);
+    long end = getTimeInMicroseconds();
+    return static_cast<double>(end - start) / 1000.0;
+}
+
+double TimeDeque(std::deque<int> &deque)
+{
+    long start = getTimeInMicroseconds();
+    M_I_S_Deque(deque);
+    long end = getTimeInMicroseconds();
+    return static_cast<double>(end - start) / 1000.0;
+}
+
+int Pmerge_me(char **argv)
+{
+    std::vector<int> vec;
+    std::deque<int> deq;
+
+    for (int i = 1; argv[i]; ++i)
+    {
+        std::string arg(argv[i]);
+        if (!Is_Positive_Numbers(arg))
+        {
+            std::cerr << "Error: In teh number of teh argument" << std::endl;
+            return 1;
+        }
+
+        long num = std::strtol(arg.c_str(), NULL, 10);
+        if (num > INT_MAX)
+        {
+            std::cerr << "Error: Number greater than INT_MAX" << std::endl;
+            return 1;
+        }
+
+        vec.push_back(static_cast<int>(num));
+        deq.push_back(static_cast<int>(num));
+    }
+
+    std::cout << "Before: ";
+    for (size_t i = 0; i < vec.size(); ++i)
+        std::cout << vec[i] << " ";
+    std::cout << std::endl;
+
+    double timeVec = TimeVector(vec);
+    double timeDeq = TimeDeque(deq);
+
+    std::cout << "After: ";
+    for (size_t i = 0; i < vec.size(); ++i)
+        std::cout << vec[i] << " ";
+    std::cout << std::endl;
+
+    std::cout << std::fixed << std::setprecision(5);
+    std::cout << "Time to process a range of " << vec.size()
+              << " elements with std::vector : " << timeVec << " ms" << std::endl;
+    std::cout << "Time to process a range of " << deq.size()
+              << " elements with std::deque  : " << timeDeq << " ms" << std::endl;
+
+    return 0;
 }

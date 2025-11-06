@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 20:48:56 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/11/04 16:37:16 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/11/06 18:58:40 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,17 @@ int	BitcoinExchange(char **argv)
 		if (line.empty())
 			continue;
 
+		int pipe_count = 0;
+		for (size_t i = 0; i < line.size(); ++i)
+			if (line[i] == '|')
+				++pipe_count;
+		if (pipe_count != 1)
+		{
+			std::cerr << "Error: bad input => " << line << std::endl;
+			continue;
+		}
+
+
 		std::stringstream ss(line);
 		std::string date;
 		std::string valueStr;
@@ -238,6 +249,19 @@ int	BitcoinExchange(char **argv)
 		while (!valueStr.empty() && (valueStr[0] == ' ' || valueStr[0] == '\t'))
 			valueStr.erase(0, 1);
 
+		if (!valueStr.empty() && valueStr[0] == '-')
+		{
+			std::cerr << "Error: not a positive number." << std::endl;
+			continue;
+		}
+
+		if (valueStr.empty() || ((valueStr[0] < '0' || valueStr[0] > '9') && valueStr[0] != '.'))
+		{
+			std::cerr << "Error: bad input => " << line << std::endl;
+			continue;
+		}
+
+			
 		float value_txt = static_cast<float>(atof(valueStr.c_str()));
 
 		if (value_txt < 0)

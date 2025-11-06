@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 17:34:49 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/11/04 18:01:31 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/11/06 19:21:56 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,38 @@ bool is_operator(char c)
 
 int apply_operation(int a, int b, char op)
 {
+    long long result = 0;
+
     if (op == '+')
-        return a + b;
-    if (op == '-')
-        return a - b;
-    if (op == '*')
-        return a * b;
-    if (op == '/')
+        result = static_cast<long long>(a) + static_cast<long long>(b);
+    else if (op == '-')
+        result = static_cast<long long>(a) - static_cast<long long>(b);
+    else if (op == '*')
+        result = static_cast<long long>(a) * static_cast<long long>(b);
+    else if (op == '/')
     {
         if (b == 0)
         {
-            std::cerr << "Error of number in /" << std::endl;
+            std::cerr << "Error: division by zero" << std::endl;
             exit(1);
         }
-        return a / b;
+        result = static_cast<long long>(a) / static_cast<long long>(b);
     }
-    std::cerr << "Error in operation for operator" << std::endl;
-    exit(1);
+    else
+    {
+        std::cerr << "Error: invalid operator" << std::endl;
+        exit(1);
+    }
+
+    if (result > INT_MAX || result < INT_MIN)
+    {
+        std::cerr << "Error: result overflow at INT_MAX or INT_MIN" << std::endl;
+        exit(1);
+    }
+
+    return static_cast<int>(result);
 }
+
 
 int reverse_polish_notation(const char *expr)
 {
@@ -82,7 +96,7 @@ int reverse_polish_notation(const char *expr)
 
     if (result.size() != 1)
     {
-        std::cerr << "Error: the resut can not have more than one number" << std::endl;
+        std::cerr << "Error: the result can not have more than one number" << std::endl;
         return 1;
     }
 
