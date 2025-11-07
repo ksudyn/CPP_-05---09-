@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 20:48:56 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/11/06 18:58:40 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/11/07 17:57:43 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,12 @@ int	load_args(const std::string &date)
 /*                                                                            */
 /*   Devuelve:                                                                */
 /*     → El valor (float) del bitcoin correspondiente.                        */
+/*			it->first   // "2011-01-03"                                       */
+/*			it->second  // 0.3                       						  */
 /*     → -1.0f si hay un error o no hay fecha anterior válida.                */
 /*                                                                            */
 /* ************************************************************************** */
+
 float getClosestPrice(const std::map<std::string, float> &database_csv, const std::string &date)
 {
 	if (load_args(date) == -1)
@@ -166,6 +169,7 @@ float getClosestPrice(const std::map<std::string, float> &database_csv, const st
 /*     → 1 si hubo errores de apertura de archivos.                           */
 /*                                                                            */
 /* ************************************************************************** */
+
 int	BitcoinExchange(char **argv)
 {
 	std::ifstream file_txt(argv[1]);
@@ -249,18 +253,6 @@ int	BitcoinExchange(char **argv)
 		while (!valueStr.empty() && (valueStr[0] == ' ' || valueStr[0] == '\t'))
 			valueStr.erase(0, 1);
 
-		if (!valueStr.empty() && valueStr[0] == '-')
-		{
-			std::cerr << "Error: not a positive number." << std::endl;
-			continue;
-		}
-
-		if (valueStr.empty() || ((valueStr[0] < '0' || valueStr[0] > '9') && valueStr[0] != '.'))
-		{
-			std::cerr << "Error: bad input => " << line << std::endl;
-			continue;
-		}
-
 			
 		float value_txt = static_cast<float>(atof(valueStr.c_str()));
 
@@ -301,3 +293,10 @@ int	BitcoinExchange(char **argv)
 // std::map<int, std::string>		Mapa que asocia un número con una palabra (ej. 1 → "Lunes")
 // std::map<std::string, float>		Mapa que asocia un texto (como una fecha) con un número (precio)
 // std::map<char, int>				Mapa que asocia letras con valores numéricos
+
+// DETALLES IMPORTANTES:
+// - Usa std::map<std::string, float> para almacenar la base de datos,
+//   garantizando orden por fecha y búsqueda eficiente.
+// - Usa std::stringstream para dividir líneas de texto.
+// - Maneja casos especiales: archivo vacío, encabezado incorrecto,
+//   valores fuera de rango, fechas no válidas.
